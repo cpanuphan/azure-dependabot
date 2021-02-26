@@ -1,17 +1,13 @@
 require "dependabot/omnibus"
 
-package_manager = "nuget"
-repo = "YOUR_ORG/YOUR_PROJECT/_git/YOUR_REPO"
+package_manager = "bundler"
+repo = ENV["AZURE_PROJECT_PATH"]
 
 credentials = [{
   "type" => "git_source",
   "host" => "dev.azure.com",
   "username" => "",
   "password" => ENV["SYSTEM_ACCESSTOKEN"]
-},{
-  "type" => "nuget_feed",
-  "url" => "https://pkgs.dev.azure.com/YOUR_ORG/_packaging/YOUR_FEED/nuget/v3/index.json",
-  "token" => ":#{ENV["SYSTEM_ACCESSTOKEN"]}"
 }]
 
 source = Dependabot::Source.new(
@@ -82,9 +78,10 @@ dependencies.select(&:top_level?).each do |dep|
     credentials: credentials,
     label_language: true,
     author_details: {
-      email: "dependabot@YOUR_DOMAIN",
+      email: "dependabot@bananacoding.com",
       name: "dependabot"
     },
+    provider_metadata: { work_item: ENV["AZURE_WORK_ITEM"] },
   )
 
   pull_request = pr_creator.create

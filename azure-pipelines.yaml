@@ -18,4 +18,6 @@ steps:
     bundle exec ruby ./update.rb
   env:
     SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+    AZURE_PROJECT_PATH: YOUR_ORG/YOUR_PROJECT/_git/YOUR_REPO
+    AZURE_WORK_ITEM: WORK_ITEM_ID
   displayName: 'Update dependencies'
